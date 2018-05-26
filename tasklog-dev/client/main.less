@@ -1,0 +1,511 @@
+// variables
+
+@white: #fff;
+@light: #F8F9Fa;
+@grey: #EDEEF0;
+@primary: #2699FB;
+@success: #48C9B0;
+@success-light: #D1F2EB;
+@page-width: 75%;
+
+// mixins
+
+.is-rounded {
+    border-radius: 8px;
+}
+
+.has-shadow {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+// resets
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button.reset {
+    border: none;
+    background: none;
+    outline: 0;
+}
+
+// overrides
+
+#awn-confirm-ok {
+    background: #F44336 !important;
+}
+
+#awn-confirm-cancel {
+    background: #757575 !important;
+}
+
+.DayPicker-Day--selected:not(.DayPicker-Day--disabled):not(.DayPicker-Day--outside) {
+    background-color: @primary !important;
+}
+
+// fonts
+
+@font-face {
+    font-family: CircularStd;
+    src: url('font/CircularStd-Book.otf');
+}
+
+@font-face {
+    font-family: CircularStd;
+    src: url('font/CircularStd-Bold.otf');
+    font-weight: bold;
+}
+
+// global styles
+
+body {
+    font-family: 'CircularStd', 'Open Sans', sans-serif;
+    background: @light;
+}
+
+.hide-on-mobile {
+    @media only screen
+    and (max-device-width: 1024px)
+    and (-webkit-min-device-pixel-ratio: 1) {
+        display: none !important;
+    }
+}
+
+.hide-on-desktop {
+    @media only screen
+    and (min-device-width: 1024px) {
+        display: none !important;
+    }
+}
+
+// layout styles
+
+.container {
+    margin: 2.5% auto;
+    width: 90%;
+    height: 90vh;
+}
+
+.nav-menu,
+.page {
+    float: left;
+    vertical-align: top;
+}
+
+.navigation {
+    .nav-menu {
+        height: 90vh;
+        width: calc(100% - @page-width);
+        position: fixed;
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+
+        ul {
+            list-style: none;
+
+            li {
+                &:not(:last-child) {
+                    margin-bottom: 10%;
+                }
+
+                &.profile {
+                    margin-bottom: 15%;
+
+                    img {
+                        width: 25%;
+                        height: 25%;
+                        border-radius: 50%;
+
+                        @media only screen
+                        and (max-device-width: 1024px)
+                        and (-webkit-min-device-pixel-ratio: 1) {
+                            border: 3px solid @white;
+                        }
+                    }
+                }
+            }
+        }
+
+        @media only screen
+        and (max-device-width: 1024px)
+        and (-webkit-min-device-pixel-ratio: 1) {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 100;
+            top: 0;
+            left: 0;
+            background-color: @primary;
+            color: @white;
+            overflow-x: hidden;
+            transition: 0.5s;
+        }
+
+        &.active {
+            @media only screen
+            and (max-device-width: 1024px)
+            and (-webkit-min-device-pixel-ratio: 1) {
+                width: 75%;
+                padding: 5% 10%;
+            }
+        }
+    }
+
+    .open {
+        margin-bottom: 5%;
+        display: block;
+    }
+
+    .close {
+        position: absolute;
+        top: 0;
+        right: 5%;
+        font-size: 2rem;
+    }
+}
+
+.page {
+    .is-rounded;
+    .has-shadow;
+
+    margin-left: calc(100% - @page-width);
+    min-height: 100%;
+    background: @white;
+    width: @page-width;
+    padding: 2.5% 5%;
+
+    @media only screen
+    and (max-device-width: 1024px)
+    and (-webkit-min-device-pixel-ratio: 1) {
+        width: 100%;
+        margin-left: 0;
+    }
+}
+
+.login {
+    display: flex;
+    justify-content: center;
+    padding-top: 5vw;
+    &__content {
+        padding: 2rem;
+        width: 25rem;
+        max-width: 95%;
+        background: @white;
+        box-shadow: 0 0 0.25rem 0 rgba(0,0,0,0.25);
+        border-radius: 3px;
+        display: flex;
+        flex-direction: column;
+        &__logo {
+            width: 75%;
+            margin: 2rem auto;
+            margin-bottom: 3rem;
+            pointer-events: none;
+        }
+        &__with-google {
+            border: none;
+            font-family: inherit;
+            font-size: 1rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            background: #ce4331;
+            padding: 0.75rem;
+            border-radius: 5px;
+            cursor: pointer;
+            :first-child {
+                margin-right: 0.5rem;
+                font-size: 1.25em;
+            }
+        }
+        &__login {
+            border: none;
+            font-family: inherit;
+            font-size: 1rem;
+            color: white;
+            background: @primary;
+            padding: 0.75rem;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        &__input {
+            font-family: inherit;
+            font-size: 1rem;
+            padding: 0.5rem 1rem;
+            margin-bottom: 0.5rem;
+            &::placeholder {
+                color: #ccc;
+            }
+        }
+        &__or {
+            display: flex;
+            justify-content: center;
+            margin: 1rem 0;
+            &::after {
+                @size: 2.5rem;
+                content: 'OR';
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: @size;
+                height: @size;
+                background: #ddd;
+                color: #555;
+                border-radius: 100%;
+                opacity: 0.5;
+                font-size: 0.8rem;
+            }
+        }
+    }
+}
+
+// other styles
+
+.Select {
+    margin-bottom: 1.5rem;
+}
+
+.is-disabled .Select-control {
+    cursor: not-allowed !important;
+}
+
+.rodal-dialog {
+    top: -20% !important;
+    height: 26rem !important;
+    max-width: 95%;
+}
+
+.Select.is-focused:not(.is-open) > .Select-control {
+    border-color: @primary !important;
+}
+
+.rodal-dialog > form {
+    padding: 0.25rem 0;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+    h3 {
+        margin-bottom: 1rem;
+    }
+
+    label {
+        margin-bottom: 0.5rem;
+        font-size: 1.1rem;
+        font-weight: bold;
+
+        &:not(:first-child) {
+            margin-top: 1.5rem;
+        }
+    }
+
+    .buttons {
+        display: flex;
+        justify-content: flex-end;
+
+        button {
+            background: @primary;
+            border: 0;
+            font-family: inherit;
+            padding: 0.5rem 0.75rem;
+            border-radius: 3px;
+            cursor: pointer;
+            color: white;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        button:not(:last-child) {
+            margin-right: 0.75rem;
+        }
+
+        button[disabled] {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        button.secondary {
+            color: @primary;
+            background: none;
+            border: 2px solid @primary;
+        }
+    }
+}
+
+.navlink {
+    display: inline-flex;
+    flex-direction: column;
+
+    &::after {
+        content: '';
+        border-radius: 3px;
+        height: 3px;
+        background: transparent;
+        margin-top: 3px;
+    }
+
+    &.active::after {
+        background: @primary;
+    }
+}
+
+.your-productivity {
+    h2 {
+        text-align: center;
+        margin-bottom: 1.5rem;
+    }
+}
+
+.title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    @media screen and (max-width: 700px) {
+        font-size: 1rem;
+    }
+}
+
+.arrow {
+    @negative-margin: 0.45rem;
+    color: #333;
+    font-size: 2rem;
+    cursor: pointer;
+    &:active {
+        transform: scale(0.8);
+    }
+}
+
+.arrows {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 3rem;
+    align-items: center;
+}
+
+.icon-button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    outline: 0;
+}
+
+.log {
+    list-style: none;
+
+    div:not(:first-child) p {
+        margin-top: 2rem;
+    }
+
+    .task, .event {
+        padding: 15px 15px 15px 0px;
+
+        &:not(:last-child) {
+            border-bottom: 1px solid @grey;
+        }
+
+        .completed {
+            text-decoration: line-through;
+            color: #888;
+        }
+    }
+
+    .task {
+        section {
+            display: flex;
+            align-items: center;
+            outline: 0;
+        }
+
+        .incomplete {
+            color: @grey;
+        }
+
+        .complete {
+            color: @success;
+        }
+
+        .date-picker {
+            align-self: center;
+            margin-left: 1rem;
+            margin-right: 0.25rem;
+        }
+
+        .icon-button {
+            @size: 1.5rem;
+            align-items: center;
+            cursor: pointer;
+            display: flex;
+            height: @size;
+            justify-content: center;
+            margin: 0 0.1rem;
+            width: @size;
+            svg {
+                cursor: pointer;
+                height: 75%;
+                width: 75%;
+            }
+        }
+
+
+        input[type='text'] {
+            flex: 1;
+            border: none;
+            background: none;
+            outline: 0;
+            border: 1px solid transparent;
+            padding: 0.25rem 0.5rem;
+            font-size: 1rem;
+            font-family: inherit;
+            &:hover {
+                border-color: #ddd;
+                cursor: pointer;
+            }
+            &:focus {
+                border-color: rgba(0,0,0,0.5);
+                cursor: text;
+            }
+        }
+    }
+
+    .event {
+        padding-left: 2.2rem;
+        color: @primary;
+    }
+}
+
+.new-task {
+    margin-top: 10px;
+    margin-bottom: -10px;
+    position: relative;
+
+    input {
+        box-sizing: border-box;
+        padding: 10px 0;
+        background: transparent;
+        border: none;
+        width: 100%;
+        padding-right: 80px;
+        font-size: 1em;
+
+        &:focus {
+            outline: 0;
+        }
+    }
+}
+
+.DayPickerInput input {
+    padding: .5em 0;
+    border: 1px solid #ddd;
+    text-align: center;
+    font-weight: 400;
+}
+
